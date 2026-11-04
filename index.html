@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description"
+        content="Sfornato Ora Ostia: box di fine giornata, offerte e prodotti appena sfornati dalle attività del tuo isolato.">
+
+  <meta name="theme-color" content="#f45b28">
+
+  <title>Sfornato Ora Ostia</title>
+
+  <style>
+    :root {
+      --sfondo: #050815;
+      --riquadro: #101525;
+      --testo: #f8fafc;
+      --testo-secondario: #a8b0c2;
+      --arancione: #f45b28;
+      --giallo: #ffb33e;
+      --bordo: rgba(255, 255, 255, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--sfondo);
+      color: var(--testo);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .contenitore {
+      width: min(1160px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    /* MENU */
+
+    nav {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+      border-bottom: 1px solid var(--bordo);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+      font-size: 21px;
+      font-weight: 900;
+      text-decoration: none;
+      letter-spacing: -1px;
+    }
+
+    .logo-simbolo {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: var(--arancione);
+      box-shadow: 0 7px 0 #a92f0d;
+      transform: rotate(-4deg);
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .menu a {
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    /* PULSANTI */
+
+    .pulsante {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 21px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 999px;
+      color: white;
+      font-weight: 850;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .pulsante:hover {
+      transform: translateY(-2px);
+    }
+
+    .pulsante-arancione {
+      border-color: var(--arancione);
+      background: var(--arancione);
+      box-shadow: 0 8px 0 #a92f0d;
+    }
+
+    .pulsante-bianco {
+      border-color: white;
+      background: white;
+      color: #151515;
+    }
+
+    .pulsante-scuro {
+      border-color: #211a17;
+      background: #211a17;
+      color: white;
+    }
+
+    /* COPERTINA */
+
+    .copertina {
+      min-height: 670px;
+      padding: 55px 0 85px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .sopratitolo {
+      color: var(--giallo);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .sopratitolo::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      display: inline-block;
+      margin-right: 10px;
+      border-radius: 50%;
+      background: var(--arancione);
+      box-shadow: 0 0 0 5px rgba(244, 91, 40, 0.15);
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 22px 0 26px;
+      font-size: clamp(53px, 7vw, 92px);
+      line-height: 0.93;
+      letter-spacing: -6px;
+    }
+
+    .evidenziato {
+      color: var(--arancione);
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    .introduzione {
+      max-width: 600px;
+      color: #c9cfdb;
+      font-size: 20px;
+    }
+
+    .pulsanti {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .nota {
+      margin-top: 20px;
+      color: var(--testo-secondario);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .foto-copertina {
+      position: relative;
+      height: 560px;
+      overflow: hidden;
+      border: 1px solid var(--bordo);
+      border-radius: 34px;
+      background:
+        linear-gradient(180deg, transparent 50%, rgba(5, 8, 21, 0.6)),
+        url("https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1400&q=85")
+        center/cover no-repeat;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.42);
+    }
+
+    .etichetta {
+      position: absolute;
+      padding: 12px 17px;
+      border-radius: 999px;
+      background: white;
+      color: #211a17;
+      font-weight: 900;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+    }
+
+    .etichetta-alta {
+      top: 20px;
+      right: 20px;
+    }
+
+    .etichetta-bassa {
+      bottom: 20px;
+      left: 20px;
+    }
+
+    /* FASCIA */
+
+    .fascia {
+      width: 102%;
+      margin-left: -1%;
+      padding: 15px 0;
+      overflow: hidden;
+      background: var(--arancione);
+      transform: rotate(-1deg);
+    }
+
+    .fascia div {
+      width: max-content;
+      color: white;
+      font-weight: 900;
+      letter-spacing: 2px;
+      white-space: nowrap;
+      animation: movimento 28s linear infinite;
+    }
+
+    .fascia span {
+      margin: 0 25px;
+      color: var(--giallo);
+    }
+
+    @keyframes movimento {
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* SEZIONI */
+
+    section {
+      padding: 105px 0;
+    }
+
+    .testata-sezione {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 45px;
+    }
+
+    .titolo-piccolo {
+      color: var(--arancione);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      max-width: 760px;
+      margin: 10px 0 0;
+      font-size: clamp(38px, 5vw, 64px);
+      line-height: 1;
+      letter-spacing: -4px;
+    }
+
+    .testata-sezione p {
+      max-width: 390px;
+      color: var(--testo-secondario);
+    }
+
+    /* COME FUNZIONA */
+
+    .passaggi {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .scheda {
+      padding: 30px;
+      border: 1px solid var(--bordo);
+      border-radius: 28px;
+      background: var(--riquadro);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+    }
+
+    .numero {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--arancione);
+      color: white;
+      font-size: 20px;
+      font-weight: 950;
+    }
+
+    .scheda h3 {
+      margin: 25px 0 10px;
+      font-size: 24px;
+    }
+
+    .scheda p {
+      margin: 0;
+      color: var(--testo-secondario);
+    }
+
+    /* OFFERTE */
+
+    .sezione-offerte {
+      border-top: 1px solid var(--bordo);
+      border-bottom: 1px solid var(--bordo);
+      background: #090e1d;
+    }
+
+    .offerte {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .offerta {
+      min-height: 350px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 28px;
+      color: #211a17;
+      background: #f8d086;
+    }
+
+    .offerta:nth-child(2) {
+      background: #ff8c64;
+    }
+
+    .offerta:nth-child(3) {
+      background: #f6f0df;
+    }
+
+    .offerta:nth-child(4) {
+      background: #98d9c6;
+    }
+
+    .tipo-offerta {
+      align-self: flex-start;
+      z-index: 2;
+      margin: 18px 18px -10px;
+      padding: 7px 11px;
+      border: 1px solid #211a17;
+      border-radius: 999px;
+      background: white;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .foto-offerta {
+      height: 165px;
+      background:
+        url("https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=1200&q=85")
+        center/cover no-repeat;
+    }
+
+    .testo-offerta {
+      padding: 0 22px 25px;
+    }
+
+    .testo-offerta h3 {
+      margin: 0 0 5px;
+      font-size: 24px;
+    }
+
+    .testo-offerta small {
+      font-weight: 750;
+    }
+
+    /* COMMERCIANTI */
+
+    .commercianti {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .foto-commercianti {
+      min-height: 540px;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      border: 2px solid rgba(255, 255, 255, 0.75);
+      border-radius: 34px;
+      color: white;
+      background:
+        linear-gradient(180deg, transparent 20%, rgba(5, 8, 21, 0.95)),
+        url("https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=1400&q=85")
+        center/cover no-repeat;
+      box-shadow: 16px 18px 0 rgba(255, 255, 255, 0.12);
+      transform: rotate(-1deg);
+    }
+
+    .foto-commercianti h3 {
+      margin: 0 0 22px;
+      font: italic 700 48px/0.95 Georgia, serif;
+    }
+
+    .foto-commercianti ul {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .foto-commercianti li {
+      padding: 12px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 14px;
+      background: rgba(5, 8, 21, 0.78);
+      font-weight: 800;
+    }
+
+    .testo-commercianti p {
+      color: var(--testo-secondario);
+      font-size: 18px;
+    }
+
+    /* BLOCCO FINALE */
+
+    .blocco-finale {
+      padding: 70px 40px;
+      border: 2px solid #211a17;
+      border-radius: 38px;
+      background: var(--giallo);
+      color: #211a17;
+      text-align: center;
+      box-shadow: 14px 16px 0 rgba(255, 255, 255, 0.12);
+    }
+
+    .blocco-finale h2 {
+      max-width: 800px;
+      margin: 0 auto 25px;
+      font-size: clamp(42px, 6vw, 75px);
+    }
+
+    .blocco-finale p {
+      max-width: 650px;
+      margin: 0 auto 30px;
+      font-size: 18px;
+    }
+
+    footer {
+      padding: 35px 0 55px;
+      display: flex;
+      justify-content: space-between;
+      gap: 25px;
+      border-top: 1px solid var(--bordo);
+      color: var(--testo-secondario);
+      font-size: 13px;
+    }
+
+    footer a {
+      font-weight: 800;
+    }
+
+    /* TELEFONO E TABLET */
+
+    @media (max-width: 980px) {
+      .offerte {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 850px) {
+      .menu a:not(.pulsante) {
+        display: none;
+      }
+
+      .copertina,
+      .commercianti {
+        grid-template-columns: 1fr;
+      }
+
+      .copertina {
+        padding-top: 35px;
+      }
+
+      .foto-copertina {
+        height: 480px;
+      }
+
+      .passaggi,
+      .offerte {
+        grid-template-columns: 1fr;
+      }
+
+      .testata-sezione {
+        display: block;
+      }
+
+      footer {
+        display: block;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .contenitore {
+        width: calc(100% - 26px);
+      }
+
+      .menu .pulsante {
+        display: none;
+      }
+
+      h1 {
+        font-size: 53px;
+        letter-spacing: -4px;
+      }
+
+      .foto-copertina {
+        height: 390px;
+      }
+
+      section {
+        padding: 75px 0;
+      }
+
+      .foto-commercianti {
+        min-height: 470px;
+        padding: 24px;
+      }
+
+      .foto-commercianti h3 {
+        font-size: 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="contenitore">
+    <a class="logo" href="#inizio">
+      <span class="logo-simbolo">♨</span>
+      Sfornato Ora Ostia
+    </a>
+
+    <div class="menu">
+      <a href="#come-funziona">Come funziona</a>
+      <a href="#offerte">Cosa trovi</a>
+      <a href="#attivita">Per le attività</a>
+
+      <a class="pulsante pulsante-bianco"
+         href="https://whatsapp.com/channel/0029Vb9E9dV2JI8GGz6LHC2n"
+         target="_blank">
+        Segui il canale →
+      </a>
+    </div>
+  </nav>
+
+  <main id="inizio">
+
+    <header class="contenitore copertina">
+
+      <div>
+        <div class="sopratitolo">Le offerte del tuo isolato</div>
+
+        <h1>
+          Scendi.<br>
+          Ritira.<br>
+          <span class="evidenziato">Risparmia.</span>
+        </h1>
+
+        <p class="introduzione">
+          Box di fine giornata, offerte e prodotti appena sfornati
+          dalle attività vicine a casa. Li scopri su WhatsApp e li
+          ritiri a piedi.
+        </p>
+
+        <div class="pulsanti">
+          <a class="pulsante pulsante-arancione"
+             href="https://whatsapp.com/channel/0029Vb9E9dV2JI8GGz6LHC2n"
+             target="_blank">
+            Segui Sfornato Ora Ostia →
+          </a>
+
+          <a class="pulsante" href="#attivita">
+            Ho un’attività
+          </a>
+        </div>
+
+        <p class="nota">
+          Ritiro e pagamento direttamente in negozio · Nessun gruppo rumoroso
+        </p>
+      </div>
+
+      <div class="foto-copertina"
+           role="img"
+           aria-label="Pane appena sfornato">
+
+        <span class="etichetta etichetta-alta">
+          Appena sfornato
+        </span>
+
+        <span class="etichetta etichetta-bassa">
+          A pochi passi da casa
+        </span>
+      </div>
+
+    </header>
+
+    <div class="fascia">
+      <div>
+        IL TUO ISOLATO <span>✦</span>
+        BOX DI FINE GIORNATA <span>✦</span>
+        APPENA SFORNATO <span>✦</span>
+        A PIEDI DA CASA <span>✦</span>
+        ATTIVITÀ VICINE <span>✦</span>
+        IL TUO ISOLATO <span>✦</span>
+        BOX DI FINE GIORNATA <span>✦</span>
+        APPENA SFORNATO <span>✦</span>
+        A PIEDI DA CASA <span>✦</span>
+        ATTIVITÀ VICINE <span>✦</span>
+      </div>
+    </div>
+
+    <section id="come-funziona">
+      <div class="contenitore">
+
+        <div class="testata-sezione">
+          <div>
+            <div class="titolo-piccolo">
+              Il canale del tuo isolato
+            </div>
+
+            <h2>Dal messaggio al primo morso.</h2>
+          </div>
+
+          <p>
+            Un raggio piccolo e concreto: soltanto proposte
+            che puoi raggiungere vicino casa.
+          </p>
+        </div>
+
+        <div class="passaggi">
+
+          <article class="scheda">
+            <div class="numero">1</div>
+            <h3>Ricevi l’avviso</h3>
+            <p>
+              Nel canale trovi prezzo, quantità, attività e
+              orario di ritiro dell’offerta disponibile.
+            </p>
+          </article>
+
+          <article class="scheda">
+            <div class="numero">2</div>
+            <h3>Scegli cosa ti va</h3>
+            <p>
+              Box serali, pizza, pane, dolci e prodotti freschi:
+              prenoti secondo le indicazioni pubblicate.
+            </p>
+          </article>
+
+          <article class="scheda">
+            <div class="numero">3</div>
+            <h3>Scendi a ritirare</h3>
+            <p>
+              Raggiungi l’attività a piedi e paghi direttamente
+              in negozio. Semplice e vicino.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="offerte" class="sezione-offerte">
+      <div class="contenitore">
+
+        <div class="testata-sezione">
+          <div>
+            <div class="titolo-piccolo">
+              Le attività intorno a te
+            </div>
+
+            <h2>Ogni giorno qualcosa di buono.</h2>
+          </div>
+
+          <p>
+            Le proposte cambiano in base a ciò che le attività
+            del tuo isolato mettono a disposizione.
+          </p>
+        </div>
+
+        <div class="offerte">
+
+          <article class="offerta">
+            <span class="tipo-offerta">Appena sfornato</span>
+            <div class="foto-offerta"></div>
+
+            <div class="testo-offerta">
+              <h3>Pizzerie</h3>
+              <small>Pizza in teglia, fritti e specialità del giorno</small>
+            </div>
+          </article>
+
+          <article class="offerta">
+            <span class="tipo-offerta">Dolce e salato</span>
+            <div class="foto-offerta"></div>
+
+            <div class="testo-offerta">
+              <h3>Bar e pasticcerie</h3>
+              <small>Cornetti, torte, biscotti e prodotti da banco</small>
+            </div>
+          </article>
+
+          <article class="offerta">
+            <span class="tipo-offerta">Box serali</span>
+            <div class="foto-offerta"></div>
+
+            <div class="testo-offerta">
+              <h3>Supermercati</h3>
+              <small>Box di fine giornata e prodotti ancora disponibili</small>
+            </div>
+          </article>
+
+          <article class="offerta">
+            <span class="tipo-offerta">Offerta del giorno</span>
+            <div class="foto-offerta"></div>
+
+            <div class="testo-offerta">
+              <h3>Attività locali</h3>
+              <small>Proposte fresche comunicate direttamente nel canale</small>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="attivita">
+      <div class="contenitore commercianti">
+
+        <div class="foto-commercianti">
+          <h3>Il tuo box può arrivare ai vicini.</h3>
+
+          <ul>
+            <li>✓ Invia i box disponibili a fine giornata</li>
+            <li>✓ Segnala ciò che hai appena sfornato</li>
+            <li>✓ Porta persone realmente vicine alla tua attività</li>
+          </ul>
+        </div>
+
+        <div class="testo-commercianti">
+          <div class="titolo-piccolo">
+            Per le attività dell’isolato
+          </div>
+
+          <h2>
+            Tu mandi un messaggio. Noi pubblichiamo l’offerta.
+          </h2>
+
+          <p>
+            Hai un bar, una pasticceria, una pizzeria, un supermercato
+            o un’altra attività in zona? Scrivimi su WhatsApp con il
+            nome del locale, il prodotto o box, il prezzo, la quantità
+            e l’orario di ritiro.
+          </p>
+
+          <div class="pulsanti">
+            <a class="pulsante pulsante-bianco"
+               href="https://wa.me/393421818159?text=Ciao%21%20Ho%20un%27attivit%C3%A0%20a%20Ostia%20e%20vorrei%20pubblicare%20un%27offerta%20su%20Sfornato%20Ora.%20Nome%20attivit%C3%A0%3A%20%0AProdotto%20o%20box%3A%20%0APrezzo%3A%20%0AQuantit%C3%A0%3A%20%0AOrario%20di%20ritiro%3A%20"
+               target="_blank">
+              Scrivimi su WhatsApp →
+            </a>
+          </div>
+
+          <p class="nota">
+            Il messaggio è già predisposto con le informazioni
+            utili per pubblicare la proposta.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="contenitore">
+
+        <div class="blocco-finale">
+          <h2>
+            Le offerte sotto casa, sul tuo telefono.
+          </h2>
+
+          <p>
+            Segui il canale del tuo isolato e scopri box di fine
+            giornata, occasioni e prodotti appena sfornati
+            raggiungibili a piedi.
+          </p>
+
+          <a class="pulsante pulsante-scuro"
+             href="https://whatsapp.com/channel/0029Vb9E9dV2JI8GGz6LHC2n"
+             target="_blank">
+            Apri Sfornato Ora Ostia →
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="contenitore">
+    <p>
+      <strong>Sfornato Ora Ostia</strong> · Le offerte del tuo isolato.
+    </p>
+
+    <p>
+      © 2026 ·
+      <a href="https://wa.me/393421818159" target="_blank">
+        Contatti WhatsApp
+      </a>
+      · Ingredienti e allergeni sono comunicati dalle singole attività.
+    </p>
+  </footer>
+
+</body>
+</html>
